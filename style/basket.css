@@ -1,0 +1,48 @@
+/* Desktop Warenkorb */
+.basket{
+  position:sticky; top:12px; align-self:start;
+  background:#fff; border:1px solid var(--line); border-radius:.75rem; padding:1rem;
+  height:fit-content;
+}
+#basket-title{ margin-top:0; }
+#basketItems{ display:flex; flex-direction:column; gap:.65rem; }
+
+.basket-item{
+  display:grid; grid-template-columns: 1fr auto auto; gap:.5rem; align-items:center;
+  border-bottom:1px solid var(--line); padding:.5rem 0;
+}
+.basket-item:last-child{ border-bottom:0; }
+.qty-ctrl{ display:flex; gap:.25rem; }
+.qty-btn{ width:28px; height:28px; border-radius:4px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+.qty-btn:hover{ background:#f2f2f2; }
+
+.basket-summary{ margin-top:.75rem; display:flex; flex-direction:column; gap:.5rem; }
+.basket-summary .total{ border-top:1px solid var(--line); padding-top:.5rem; }
+
+/* Mobiler Toggle */
+.basket-toggle{
+  position:fixed; left:50%; transform:translateX(-50%);
+  bottom:12px; z-index:900; border:0; border-radius:999px;
+  padding:.75rem 1rem; background:var(--brand); color:#fff; font-weight:700;
+  display:none;
+}
+
+/* Dialog (mobil) */
+.basket-dialog[hidden]{ display:none !important; }
+.basket-dialog{
+  position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:1000;
+  display:flex; align-items:flex-end; justify-content:center; padding:1rem;
+}
+.dialog-card{
+  width:min(680px, 100%); background:#fff; border-radius:1rem 1rem .75rem .75rem;
+  max-height:80dvh; display:flex; flex-direction:column; overflow:hidden;
+}
+.dialog-head{ display:flex; align-items:center; justify-content:space-between; padding:1rem; border-bottom:1px solid var(--line); }
+.dialog-body{ padding: .5rem 1rem 1rem; overflow:auto; max-height:55dvh; display:flex; flex-direction:column; gap:.65rem; }
+.dialog-foot{ padding: .75rem 1rem 1rem; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:.5rem; }
+
+/* Breakpoint: unter 980px wird der Desktopkorb ausgeblendet */
+@media (max-width:980px){
+  .basket{ display:none; }
+  .basket-toggle{ display:inline-flex; }
+}

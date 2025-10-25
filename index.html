@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BestellApp – Paradise Noodles</title>
+  <meta name="theme-color" content="#ff7a00" />
+
+  <!-- Favicon / PWA Icons (du hast sie bereits) -->
+  <link rel="icon" href="assets/Favicon/favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/Favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/Favicon/site.webmanifest" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style/standard.css" />
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/basket.css" />
+</head>
+<body>
+  <!-- Skip-Link für Screenreader/Tastatur -->
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="app-header" role="banner">
+    <div class="app-bar" aria-label="Top-Leiste">
+      <img src="assets/Logo/Logo.png" alt="BestellApp Logo" class="brand" />
+      <h1 class="visually-hidden">BestellApp – Lieferdienst</h1>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero" aria-hidden="true">
+      <img src="assets/imgs/restaurant-hero.jpg" alt="" />
+    </div>
+
+    <!-- Überlagertes Restaurant-Logo -->
+    <div class="restaurant-badge" aria-hidden="true">
+      <img src="assets/Logo/Bestell App- Logo.svg" alt="" />
+    </div>
+
+    <!-- Restaurant-Infos -->
+    <section class="restaurant-header" aria-labelledby="restaurant-title">
+      <h2 id="restaurant-title">Paradise Noodles</h2>
+      <p>
+        <span aria-label="Bewertung">⭐ 4,2 / 5</span>
+        · Lieferzeit ~30–40 Min · Lieferkosten 3,50 €
+      </p>
+      <p class="muted">Asiatische Küche · Frisch & würzig</p>
+    </section>
+
+    <!-- Kategorie-Navigation -->
+    <nav class="category-tabs" aria-label="Gerichte-Kategorien">
+      <ul id="categoryTabs" role="tablist"></ul>
+    </nav>
+  </header>
+
+  <main id="main" class="layout" role="main">
+    <!-- Menübereich -->
+    <section id="menu" class="menu" aria-label="Gerichte">
+      <!-- Kategorien + Gerichte werden hier dynamisch gerendert -->
+    </section>
+
+    <!-- Warenkorb (Sticky am Desktop) -->
+    <aside id="basket" class="basket" aria-labelledby="basket-title" aria-live="polite">
+      <h2 id="basket-title">Warenkorb</h2>
+      <div id="basketItems"></div>
+
+      <div class="basket-summary" aria-label="Zusammenfassung">
+        <div class="row"><span>Zwischensumme</span><span id="subTotal">0,00 €</span></div>
+        <div class="row"><span>Lieferkosten</span><span id="delivery">3,50 €</span></div>
+        <div class="row total"><strong>Gesamt</strong><strong id="grandTotal">3,50 €</strong></div>
+        <button id="checkoutBtn" class="btn btn-primary" aria-label="Bestellen">Bestellen</button>
+        <p id="orderMsg" class="order-msg" role="status" aria-live="polite"></p>
+      </div>
+    </aside>
+
+    <!-- Mobiler Warenkorb-Button -->
+    <button id="basketToggle" class="basket-toggle" aria-controls="basketDialog" aria-expanded="false">
+      Warenkorb · <span id="miniTotal">0,00 €</span>
+    </button>
+
+    <!-- Mobiler Warenkorb-Dialog -->
+    <div id="basketDialog" class="basket-dialog" role="dialog" aria-modal="true" aria-labelledby="basketDialogTitle" hidden>
+      <div class="dialog-card" role="document">
+        <div class="dialog-head">
+          <h2 id="basketDialogTitle">Warenkorb</h2>
+          <button class="icon-btn" id="closeDialog" aria-label="Dialog schließen">✕</button>
+        </div>
+        <div id="basketItemsMobile" class="dialog-body"></div>
+        <div class="dialog-foot">
+          <div class="row"><span>Zwischensumme</span><span id="subTotalM">0,00 €</span></div>
+          <div class="row"><span>Lieferkosten</span><span id="deliveryM">3,50 €</span></div>
+          <div class="row total"><strong>Gesamt</strong><strong id="grandTotalM">3,50 €</strong></div>
+          <button id="checkoutBtnM" class="btn btn-primary" aria-label="Bestellen (mobil)">Bestellen</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <small>© 2025 BestellApp · Demo-Projekt</small>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts/db.js"></script>
+  <script src="scripts/template.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+</html>
