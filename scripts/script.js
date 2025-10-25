@@ -118,3 +118,15 @@ function closeDialog(){
   dlg.hidden = true;
   document.getElementById("basketToggle").setAttribute("aria-expanded","false");
 }
+// 🍔 Burger-Menü Funktion
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.getElementById('navMenu');
+
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+    navMenu.classList.toggle('open');
+    navMenu.setAttribute('aria-hidden', String(expanded));
+  });
+}

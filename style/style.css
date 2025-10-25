@@ -1,67 +1,415 @@
-/* Top-Bar */
-.app-bar{
-  display:flex; align-items:center; gap:.75rem;
-  padding:.75rem 1rem; background:var(--brand); color:#fff;
-}
-.app-bar .brand{ height:28px; width:auto; }
-
-/* Hero mit überlagertem Logo */
-.hero{ position:relative; width:100%; height:220px; overflow:hidden; }
-.hero img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-.restaurant-badge{
-  position:relative; margin-top:-42px; display:flex; justify-content:center;
-}
-.restaurant-badge img{
-  width:84px; height:84px; border-radius:50%;
-  border:4px solid #fff; background:#fff; object-fit:cover;
+/* =======================
+   🔝 App-Bar (Header)
+   ======================= */
+.app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Logo links, Burger rechts */
+  padding: 1.25rem 1.5rem;
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1000;
 }
 
-/* Restaurant-Infos */
-.restaurant-header{ max-width:1080px; margin:0 auto; padding: .75rem 1rem 1rem;}
-.restaurant-header h2{ margin:.25rem 0 .25rem; }
-.restaurant-header p{ margin:.1rem 0; }
-
-/* Tabs / Kategorien */
-.category-tabs{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fff; }
-.category-tabs ul{
-  list-style:none; margin:0 auto; padding:0 .5rem; max-width:1080px; display:flex; gap:.5rem; overflow:auto;
-}
-.category-tabs button{
-  background:#fff; border:1px solid var(--line); border-radius:999px;
-  padding:.5rem .9rem; cursor:pointer; white-space:nowrap;
-}
-.category-tabs button[aria-selected="true"]{
-  background:var(--brand); color:#fff; border-color:var(--brand);
+.app-bar .brand {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* Seite: Menü + Warenkorb */
-.layout{
-  max-width:1080px; margin:1rem auto; padding:0 1rem;
-  display:grid; grid-template-columns: 1fr 360px; gap:1rem;
+/* =======================
+   🍔 Burger-Menü Button
+   ======================= */
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px;
+  width: 36px;
+  height: 36px;
+  transition: transform 0.2s ease;
 }
-@media (max-width: 980px){
-  .layout{ grid-template-columns: 1fr; }
+.menu-toggle:hover {
+  transform: scale(1.1);
 }
 
-/* Menü-Sektion */
-.menu{ display:flex; flex-direction:column; gap:1rem; }
-.category-block{ background:#fff; border:1px solid var(--line); border-radius:.75rem; overflow:hidden; }
-.category-head{
-  padding:.75rem 1rem; background:var(--card); border-bottom:1px solid var(--line); font-weight:700;
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 24px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: relative;
 }
-.dish{
-  display:flex; justify-content:space-between; gap:1rem;
-  padding:.85rem 1rem; border-top:1px solid var(--line);
+.menu-icon::before {
+  top: -7px;
+  position: relative;
 }
-.dish:first-of-type{ border-top:0; }
-.dish-info{ display:flex; flex-direction:column; gap:.25rem; }
-.dish-name{ font-weight:600; }
-.dish-desc{ color:var(--muted); font-size:.95rem; }
-.dish-price{ color:var(--brand-700); font-weight:700; }
-.dish-actions{ display:flex; align-items:center; gap:.5rem; }
-.plus-btn{
-  width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
-  background:#fff; cursor:pointer; font-weight:700;
+.menu-icon::after {
+  top: 4px;
+  position: relative;
 }
-.plus-btn:hover{ background:#f2f2f2; }
+
+/* Aktivzustand (X-Icon) */
+.menu-toggle[aria-expanded="true"] .menu-icon {
+  background-color: transparent;
+}
+.menu-toggle[aria-expanded="true"] .menu-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+.menu-toggle[aria-expanded="true"] .menu-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* =======================
+   📋 Ausklapp-Menü
+   ======================= */
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background: #fff;
+  color: var(--brand);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 0.75rem 1rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.nav-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu li {
+  margin: 0.5rem 0;
+}
+.nav-menu a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav-menu a:hover,
+.nav-menu a:focus {
+  text-decoration: underline;
+}
+
+/* =======================
+   📋 Menü & Burger-Fix
+   ======================= */
+
+/* Standard: Burger immer sichtbar, Menü immer ausgeblendet */
+.menu-toggle {
+  display: flex;
+}
+
+.nav-menu {
+  display: none; /* standardmäßig versteckt */
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background: #fff;
+  color: var(--brand);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 0.75rem 1rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+/* Sichtbar, wenn geöffnet */
+.nav-menu.open {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Menü-Links */
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu li {
+  margin: 0.5rem 0;
+}
+.nav-menu a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav-menu a:hover,
+.nav-menu a:focus {
+  text-decoration: underline;
+}
+
+/* Optional: auf größeren Screens Menü rechts neben Burger */
+@media (min-width: 1024px) {
+  .nav-menu {
+    right: 2rem;
+  }
+}
+/* =======================
+   🥡 Hero-Bereich (verkleinert)
+   ======================= */
+.hero-section {
+  background-image: url("../assets/imgs/food2.png");
+  background-size: cover;
+  background-position: top center;
+  height: 30vh; /* vorher 50vh */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Unterer Hero-Bereich */
+.hero-section-lower {
+  background-image: url("../assets/imgs/food2.png");
+  background-size: cover;
+  background-position: bottom center;
+  height: 15vh; /* halb so hoch wie Hero */
+  width: 100%;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sanfter Übergang zwischen Hero und Body */
+.hero-section-lower::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to top, #fefaef, transparent);
+}
+
+/* Sanfter Übergang */
+.hero-section-lower::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to top, #fefaef, transparent);
+}
+
+/* =======================
+   🍜 Noodlebox-Element
+   ======================= */
+.noodlebox-section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: -80px;
+  z-index: 10;
+}
+
+.noodlebox-wrapper {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noodlebox-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 50%;
+}
+
+/* 📱 Responsiv für Noodlebox */
+@media (max-width: 768px) {
+  .noodlebox-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+}
+@media (max-width: 400px) {
+  .noodlebox-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* =======================
+   🏮 Restaurant-Infos
+   ======================= */
+.restaurant-header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem 1rem;
+  text-align: center;
+}
+.restaurant-header h2 {
+  margin: 0.25rem 0;
+}
+.restaurant-header p {
+  margin: 0.1rem 0;
+}
+
+/* =======================
+   🥢 Kategorie-Tabs
+   ======================= */
+.category-tabs {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.category-tabs ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0.5rem;
+  max-width: 1080px;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.category-tabs li {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.category-tabs li:hover,
+.category-tabs li[aria-selected="true"] {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+
+/* =======================
+   🧾 Menü + Warenkorb
+   ======================= */
+.layout {
+  max-width: 1080px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1rem;
+}
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Menü-Karten */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.category-block {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.category-head {
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+.dish {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--line);
+}
+.dish:first-of-type {
+  border-top: 0;
+}
+.dish-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.dish-name {
+  font-weight: 600;
+}
+.dish-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.dish-price {
+  color: var(--brand-700);
+  font-weight: 700;
+}
+.dish-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.plus-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+.plus-btn:hover {
+  background: #f2f2f2;
+}
+@media (max-width: 600px) {
+  .app-bar {
+    padding: 0.9rem 1rem;
+  }
+  .app-bar .brand {
+    height: 36px;
+  }
+  .hero-section {
+    height: 25vh;
+  }
+  .hero-section-lower {
+    height: 12vh;
+  }
+}

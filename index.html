@@ -6,10 +6,10 @@
   <title>BestellApp – Paradise Noodles</title>
   <meta name="theme-color" content="#ff7a00" />
 
-  <!-- Favicon / PWA Icons (du hast sie bereits) -->
+  <!-- Favicon -->
   <link rel="icon" href="assets/Favicon/favicon.ico" />
   <link rel="apple-touch-icon" href="assets/Favicon/apple-touch-icon.png" />
-  <link rel="manifest" href="assets/Favicon/site.webmanifest" />
+  
 
   <!-- Styles -->
   <link rel="stylesheet" href="style/standard.css" />
@@ -17,24 +17,39 @@
   <link rel="stylesheet" href="style/basket.css" />
 </head>
 <body>
-  <!-- Skip-Link für Screenreader/Tastatur -->
+  <!-- Skip-Link -->
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
   <header class="app-header" role="banner">
-    <div class="app-bar" aria-label="Top-Leiste">
-      <img src="assets/Logo/Logo.png" alt="BestellApp Logo" class="brand" />
-      <h1 class="visually-hidden">BestellApp – Lieferdienst</h1>
-    </div>
+   <div class="app-bar" aria-label="Top-Leiste">
+  <!-- Logo links -->
+  <img src="assets/Logo/Logo.png" alt="BestellApp Logo" class="brand" />
 
-    <!-- Hero -->
-    <div class="hero" aria-hidden="true">
-      <img src="assets/imgs/restaurant-hero.jpg" alt="" />
-    </div>
+  <!-- Burger-Menü rechts -->
+  <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navMenu">
+    <span class="menu-icon"></span>
+  </button>
 
-    <!-- Überlagertes Restaurant-Logo -->
-    <div class="restaurant-badge" aria-hidden="true">
-      <img src="assets/Logo/Bestell App- Logo.svg" alt="" />
-    </div>
+  <!-- Navigationsmenü (ausklappbar) -->
+  <nav id="navMenu" class="nav-menu" aria-hidden="true">
+    <ul>
+      <li><a href="#menu">Menü</a></li>
+      <li><a href="#basket">Warenkorb</a></li>
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+</div>
+
+    <!-- Hero-Bild (oberer Teil) -->
+    <section class="hero-section" aria-label="Restaurant Vorschau"></section>
+
+    <!-- Nudelbox-Logo -->
+    <section class="noodlebox-section" aria-label="Nudelbox Symbol">
+      <div class="noodlebox-wrapper">
+        <img src="assets/imgs/noodlebox.png" alt="Illustration einer Nudelbox" class="noodlebox-img">
+      </div>
+    </section>
 
     <!-- Restaurant-Infos -->
     <section class="restaurant-header" aria-labelledby="restaurant-title">
@@ -48,17 +63,23 @@
 
     <!-- Kategorie-Navigation -->
     <nav class="category-tabs" aria-label="Gerichte-Kategorien">
-      <ul id="categoryTabs" role="tablist"></ul>
+      <ul id="categoryTabs" role="tablist">
+        <li role="tab">Vorspeisen</li>
+        <li role="tab">Salate</li>
+        <li role="tab">Hauptgerichte</li>
+        <li role="tab">Beilagen</li>
+        <li role="tab">Getränke</li>
+      </ul>
     </nav>
   </header>
 
-  <main id="main" class="layout" role="main">
-    <!-- Menübereich -->
-    <section id="menu" class="menu" aria-label="Gerichte">
-      <!-- Kategorien + Gerichte werden hier dynamisch gerendert -->
-    </section>
+  <!-- Unteres Hero-Bild -->
+  <section class="hero-section-lower" aria-label="Unterer Bildabschnitt"></section>
 
-    <!-- Warenkorb (Sticky am Desktop) -->
+  <main id="main" class="layout" role="main">
+    <section id="menu" class="menu" aria-label="Gerichte"></section>
+
+    <!-- Warenkorb -->
     <aside id="basket" class="basket" aria-labelledby="basket-title" aria-live="polite">
       <h2 id="basket-title">Warenkorb</h2>
       <div id="basketItems"></div>
@@ -72,12 +93,11 @@
       </div>
     </aside>
 
-    <!-- Mobiler Warenkorb-Button -->
+    <!-- Mobiler Warenkorb -->
     <button id="basketToggle" class="basket-toggle" aria-controls="basketDialog" aria-expanded="false">
       Warenkorb · <span id="miniTotal">0,00 €</span>
     </button>
 
-    <!-- Mobiler Warenkorb-Dialog -->
     <div id="basketDialog" class="basket-dialog" role="dialog" aria-modal="true" aria-labelledby="basketDialogTitle" hidden>
       <div class="dialog-card" role="document">
         <div class="dialog-head">
