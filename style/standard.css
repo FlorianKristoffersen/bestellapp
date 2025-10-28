@@ -10,7 +10,11 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html, body {
+  height: 100%;        
+  overflow-x: hidden;
+  overflow-y: auto;     
+}
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -19,14 +23,12 @@ body{
   line-height:1.4;
 }
 
-/* sichtbarer Tastatur-Fokus */
 :focus-visible{
   outline:3px solid #0a84ff;
   outline-offset:2px;
   border-radius:4px;
 }
 
-/* Skip-Link */
 .skip-link{
   position:absolute; left:-9999px; top:auto;
 }
@@ -36,7 +38,6 @@ body{
   text-decoration:none;
 }
 
-/* Buttons */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
   padding:.7rem 1rem; border:0; border-radius:.5rem; cursor:pointer;
@@ -45,7 +46,6 @@ body{
 .btn-primary{ background:var(--brand); color:#fff; }
 .btn-primary:hover{ background:var(--brand-700); }
 
-/* Utility */
 .visually-hidden{
   position:absolute !important; width:1px;height:1px; margin:-1px;overflow:hidden; clip:rect(0 0 0 0); border:0; padding:0;
 }

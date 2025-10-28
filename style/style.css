@@ -1,415 +1,381 @@
-/* =======================
-   🔝 App-Bar (Header)
-   ======================= */
+
+   /* HEADER */
+
 .app-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Logo links, Burger rechts */
-  padding: 1.25rem 1.5rem;
-  background: var(--brand);
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: #ff7a00;
   color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 1000;
-}
+} 
 
 .app-bar .brand {
   height: 45px;
   width: auto;
   object-fit: contain;
-}
+} 
 
-/* =======================
-   🍔 Burger-Menü Button
-   ======================= */
 .menu-toggle {
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  padding: 5px;
-  width: 36px;
-  height: 36px;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  position: relative;
   transition: transform 0.2s ease;
 }
-.menu-toggle:hover {
-  transform: scale(1.1);
-}
+.menu-toggle:hover { transform: scale(1.05); }
 
 .menu-icon,
 .menu-icon::before,
 .menu-icon::after {
   content: "";
-  display: block;
-  height: 3px;
+  position: absolute;
+  left: 50%;
   width: 24px;
+  height: 3px;
   background-color: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
-  position: relative;
+  transform-origin: center;
 }
-.menu-icon::before {
-  top: -7px;
-  position: relative;
-}
-.menu-icon::after {
-  top: 4px;
-  position: relative;
-}
+.menu-icon { transform: translateX(-50%); }
+.menu-icon::before { transform: translate(-50%, -7px); }
+.menu-icon::after { transform: translate(-50%, 7px); }
+.menu-toggle[aria-expanded="true"] .menu-icon { background: transparent; }
+.menu-toggle[aria-expanded="true"] .menu-icon::before { transform: translate(-50%) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .menu-icon::after { transform: translate(-50%) rotate(-45deg); }
 
-/* Aktivzustand (X-Icon) */
-.menu-toggle[aria-expanded="true"] .menu-icon {
-  background-color: transparent;
-}
-.menu-toggle[aria-expanded="true"] .menu-icon::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-.menu-toggle[aria-expanded="true"] .menu-icon::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
-
-/* =======================
-   📋 Ausklapp-Menü
-   ======================= */
+/* NAV MENU */
 .nav-menu {
   position: absolute;
   top: 100%;
-  right: 1rem;
+  right: 16px;
   background: #fff;
-  color: var(--brand);
+  color: #ff7a00;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  padding: 0.75rem 1rem;
-  transform: translateY(-10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
   opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.nav-menu.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.nav-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-menu li {
-  margin: 0.5rem 0;
-}
-.nav-menu a {
-  color: var(--brand);
-  text-decoration: none;
-  font-weight: 600;
-}
-.nav-menu a:hover,
-.nav-menu a:focus {
-  text-decoration: underline;
-}
-
-/* =======================
-   📋 Menü & Burger-Fix
-   ======================= */
-
-/* Standard: Burger immer sichtbar, Menü immer ausgeblendet */
-.menu-toggle {
-  display: flex;
-}
-
-.nav-menu {
-  display: none; /* standardmäßig versteckt */
-  position: absolute;
-  top: 100%;
-  right: 1rem;
-  background: #fff;
-  color: var(--brand);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  padding: 0.75rem 1rem;
   transform: translateY(-10px);
-  opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
   z-index: 999;
 }
-
-/* Sichtbar, wenn geöffnet */
 .nav-menu.open {
-  display: block;
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
-
-/* Menü-Links */
-.nav-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-menu li {
-  margin: 0.5rem 0;
-}
+.nav-menu ul { list-style: none; margin: 0; padding: 0; }
+.nav-menu li { margin: 8px 0; }
 .nav-menu a {
-  color: var(--brand);
+  color: #ff7a00;
   text-decoration: none;
   font-weight: 600;
 }
 .nav-menu a:hover,
-.nav-menu a:focus {
-  text-decoration: underline;
-}
+.nav-menu a:focus { text-decoration: underline; }
 
-/* Optional: auf größeren Screens Menü rechts neben Burger */
-@media (min-width: 1024px) {
-  .nav-menu {
-    right: 2rem;
-  }
-}
-/* =======================
-   🥡 Hero-Bereich (verkleinert)
-   ======================= */
+/* HERO */
 .hero-section {
-  background-image: url("../assets/imgs/food2.png");
-  background-size: cover;
-  background-position: top center;
-  height: 30vh; /* vorher 50vh */
+  background: url("../assets/imgs/food2.png") center top / cover no-repeat;
+  height: 300px;
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: flex-end;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Unterer Hero-Bereich */
-.hero-section-lower {
-  background-image: url("../assets/imgs/food2.png");
-  background-size: cover;
-  background-position: bottom center;
-  height: 15vh; /* halb so hoch wie Hero */
-  width: 100%;
-  border-radius: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Sanfter Übergang zwischen Hero und Body */
-.hero-section-lower::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(to top, #fefaef, transparent);
-}
-
-/* Sanfter Übergang */
-.hero-section-lower::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(to top, #fefaef, transparent);
-}
-
-/* =======================
-   🍜 Noodlebox-Element
-   ======================= */
-.noodlebox-section {
-  display: flex;
   justify-content: center;
   position: relative;
-  margin-top: -80px;
+  overflow: visible;
+  
+}
+.hero-section-lower {
+  background: url("../assets/imgs/food2.png") center 60% / cover no-repeat;
+  height: 150px;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Hero fix for small screens */
+@media (max-width: 600px) {
+  .hero-section { background-position: center 20%; height: 260px; }
+  .hero-section-lower { background-position: center 70%; height: 100px; }
+}
+@media (max-width: 440px) {
+  .hero-section { background-position: center top; height: 220px; }
+  .hero-section-lower { display: none; }
+}
+
+/* NOODLEBOX */
+.noodlebox-section {
+  position: relative;
+  height: 0;           
   z-index: 10;
 }
-
 .noodlebox-wrapper {
+  position: absolute;
+  top: 0;                
+  left: 50%;             
+  transform: translate(-50%, -50%);
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  overflow: hidden;
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: width 0.3s ease, height 0.3s ease;
 }
-
+@media (min-width: 1021px) {
+  .noodlebox-wrapper {
+   
+    transform: translate(-50%, -50%);
+  }
+}
+@media (max-width: 1020px) {
+  .noodlebox-wrapper { left: 50%; transform: translate(-50%, -50%); }
+}
+@media (max-width: 1200px) { .noodlebox-wrapper { width: 140px; height: 140px; } }
+@media (max-width: 992px) { .noodlebox-wrapper { width: 120px; height: 120px; } }
+@media (max-width: 800px) { .noodlebox-wrapper { width: 90px; height: 90px; } }
+@media (max-width: 600px) { .noodlebox-wrapper { width: 75px; height: 75px; } }
+@media (max-width: 400px) { .noodlebox-wrapper { width: 60px; height: 60px; } }
 .noodlebox-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  display: block;
   border-radius: 50%;
 }
 
-/* 📱 Responsiv für Noodlebox */
-@media (max-width: 768px) {
-  .noodlebox-wrapper {
-    width: 120px;
-    height: 120px;
-  }
-}
-@media (max-width: 400px) {
-  .noodlebox-wrapper {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/* =======================
-   🏮 Restaurant-Infos
-   ======================= */
+/* RESTAURANT HEADER */
 .restaurant-header {
-  max-width: 1080px;
+  max-width: 1920px;
   margin: 0 auto;
-  padding: 0.75rem 1rem 1rem;
-  text-align: center;
+  padding: 16px 32px;
+  color: #222;
 }
 .restaurant-header h2 {
-  margin: 0.25rem 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f485e;
 }
-.restaurant-header p {
-  margin: 0.1rem 0;
-}
+.restaurant-meta { font-size: 16px; color: #444; }
+.restaurant-meta span { color: #ffb703; }
 
-/* =======================
-   🥢 Kategorie-Tabs
-   ======================= */
+/*CATEGORY TABS */
 .category-tabs {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: #fff;
+  background: #f7f5f1;
+  padding: 20px 0 16px;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  overflow: visible;
 }
 .category-tabs ul {
   list-style: none;
   margin: 0 auto;
-  padding: 0.5rem;
-  max-width: 1080px;
+  padding: 0 32px;
+  max-width: 1920px;
   display: flex;
-  gap: 0.5rem;
+  gap: 12px;
   overflow-x: auto;
   scroll-behavior: smooth;
 }
 .category-tabs li {
-  background: #fff;
-  border: 1px solid var(--line);
+  background: #ff7a00;
+  border: 2px solid #ff7a00;
   border-radius: 999px;
-  padding: 0.5rem 0.9rem;
+  padding: 10px 20px;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.25s ease;
 }
 .category-tabs li:hover,
-.category-tabs li[aria-selected="true"] {
-  background: var(--brand);
-  color: #fff;
-  border-color: var(--brand);
+.category-tabs li:focus {
+  background: #e66d00;
+  border-color: #e66d00;
+  transform: translateY(-1px);
 }
 
-/* =======================
-   🧾 Menü + Warenkorb
-   ======================= */
-.layout {
-  max-width: 1080px;
-  margin: 1rem auto;
-  padding: 0 1rem;
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 1rem;
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  gap: 0;
+  box-sizing: border-box;
 }
-@media (max-width: 980px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
+.main-stack {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.menu-area {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Menü-Karten */
+/* MENU ITEMS */
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 32px;
+  padding-top: 16px;
 }
 .category-block {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  overflow: hidden;
+  width: 100%;
+  border-radius: 12px;
+  overflow: visible;
 }
 .category-head {
-  padding: 0.75rem 1rem;
-  background: var(--card);
-  border-bottom: 1px solid var(--line);
+  background: #fff;
+  border-bottom: 1px solid #eee;
   font-weight: 700;
+  padding: 14px 18px;
+  color: #222;
 }
 .dish {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.85rem 1rem;
-  border-top: 1px solid var(--line);
-}
-.dish:first-of-type {
-  border-top: 0;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;
+  border-top: 1px solid #f1f1f1;
+  background: #fff;
+  transition: background 0.25s ease;
 }
 .dish-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
 }
 .dish-name {
   font-weight: 600;
-}
-.dish-desc {
-  color: var(--muted);
-  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  white-space: normal;
 }
 .dish-price {
-  color: var(--brand-700);
+  color: #ff7a00;
   font-weight: 700;
+  white-space: nowrap;
 }
-.dish-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+.dish:hover { background: #fff7ef; }
 .plus-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
   background: #fff;
+  border: 1px solid #ddd;
   cursor: pointer;
-  font-weight: 700;
   transition: all 0.2s ease;
 }
-.plus-btn:hover {
-  background: #f2f2f2;
+.plus-btn:hover,
+.dish:hover .plus-btn,
+.dish:focus-within .plus-btn {
+  background: #ff7a00;
+  color: #fff;
+  border-color: #ff7a00;
+  transform: scale(1.05);
 }
-@media (max-width: 600px) {
-  .app-bar {
-    padding: 0.9rem 1rem;
+
+/*TRASH BUTTON */
+.trash-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+.trash-btn:hover,
+.trash-btn:focus {
+  color: #ff7a00;
+  transform: scale(1.15);
+}
+.trash-btn:focus-visible {
+  outline: 2px solid #ff7a00;
+  outline-offset: 2px;
+}
+
+/*WRAPPER */
+.page-wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/*RESPONSIVE HEADER TEXT*/
+@media (max-width: 400px) {
+  .restaurant-header h2 {
+    font-size: 22px;
+    line-height: 1.2;
+    text-align: center;
   }
-  .app-bar .brand {
-    height: 36px;
+  .restaurant-meta {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
-  .hero-section {
-    height: 25vh;
+  .restaurant-meta span {
+    font-size: 16px;
+    color: #ffb703;
   }
-  .hero-section-lower {
-    height: 12vh;
+}
+
+body, html {
+  height: auto;
+  overflow-y: visible;
+}
+
+
+.page-wrapper,
+.content-wrapper {
+  overflow: visible;
+  align-items: flex-start;
+}
+
+.basket-wrapper {
+  flex: 0 0 auto;        
+}
+
+.basket {
+  width: 360px;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  border-left: 1px solid #eaeaea;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.08);
+  z-index: 900;
+}
+
+/* Mobile Ansicht */
+@media (max-width: 1020px) {
+  .content-wrapper {
+    display: block;
+
   }
+  .basket-wrapper {
+    display: none;
+  }
+}
+.page-wrapper,
+.content-wrapper,
+.basket-wrapper {
+  overflow: visible !important;
 }
