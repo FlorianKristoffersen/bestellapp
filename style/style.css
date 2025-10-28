@@ -353,8 +353,8 @@ body, html {
 .basket {
   width: 360px;
   position: sticky;
-  top: 72px;
-  height: calc(100vh - 72px);
+  top: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
