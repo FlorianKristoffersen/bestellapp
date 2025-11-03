@@ -260,31 +260,100 @@
   background-color: #e66d00;
   transform: translateY(-1px);
 }
-
 .basket-toggle {
   position: fixed;
-  bottom: 1rem;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 20px; 
   background: #ff7a00;
   color: #fff;
+  font-size: 16px;
   font-weight: 600;
-  padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 50px;
-  box-shadow: 0 3px 12px rgba(255, 122, 0, 0.35);
+  border-radius: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  z-index: 1000;
   transition: background 0.25s ease, transform 0.15s ease;
+  line-height: 1;
+  text-align: center;
 }
-
+.basket-toggle span {
+  font-weight: 700;
+  font-size: 16px;
+  margin-left: 4px;
+}
 .basket-toggle:hover {
   background: #e66d00;
   transform: translateX(-50%) translateY(-2px);
 }
-
 .basket-toggle:active {
   transform: translateX(-50%) scale(0.97);
+}
+
+
+@media (max-width: 423px) {
+  .basket-toggle {
+    font-size: 15px;
+    
+  }
+  .basket-toggle span {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .basket-toggle {
+    font-size: 14px;
+   
+  }
+  .basket-toggle span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 340px) {
+  .basket-toggle {
+    font-size: 13.5px;
+    
+  }
+  .basket-toggle span {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 320px) {
+  .basket-toggle {
+    font-size: 13px;
+   
+  }
+  .basket-toggle span {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .basket-toggle {
+    font-size: 15px;
+  
+    gap: 6px;
+  }
+
+  .basket-toggle span {
+    font-size: 15px;
+  }
+}
+
+
+/* Mobile only */
+@media (min-width: 1021px) {
+  .basket-toggle {
+    display: none !important;
+  }
 }
 
 @media (max-width: 1020px) {

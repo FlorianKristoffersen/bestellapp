@@ -129,21 +129,18 @@ function renderBasket() {
 
 function updateTotals() {
 
-  const subtotal = Array.from(basket.values()).reduce(
+const subtotal = Array.from(basket.values()).reduce(
     (sum, item) => sum + item.price * item.qty,
     0
-  );
+);
+const delivery = RESTAURANT.deliveryFee || 3.5;
+const total = subtotal + delivery;
 
-  const delivery = RESTAURANT.deliveryFee || 3.5;
+document.getElementById("subTotal").textContent = price(subtotal);
+document.getElementById("delivery").textContent = price(delivery);
+document.getElementById("grandTotal").textContent = price(total);
 
-  const total = subtotal + delivery;
-
-  document.getElementById("subTotal").textContent = price(subtotal);
-  document.getElementById("delivery").textContent = price(delivery);
-  document.getElementById("grandTotal").textContent = price(total);
-
-
-  const miniTotal = document.getElementById("miniTotal");
+const miniTotal = document.getElementById("miniTotal");
   if (miniTotal) miniTotal.textContent = price(total);
 
   const subTotalM = document.getElementById("subTotalM");
