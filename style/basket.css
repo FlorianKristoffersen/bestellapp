@@ -528,3 +528,53 @@
   background: #c76320; 
   border-radius: 4px;
 }
+/* --- Einheitliche Skalierung und kein Zeilenumbruch im Warenkorb-Button --- */
+.basket-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;         /* Kein Zeilenumbruch */
+  flex-wrap: nowrap;           /* Alles in einer Zeile */
+  overflow: hidden;            /* Verhindert Überlaufen */
+  text-overflow: ellipsis;
+  text-align: center;
+
+  font-size: 16px;             /* Basisgröße */
+  font-weight: 600;
+  padding: 16px 20px;
+  border-radius: 40px;
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: font-size 0.2s ease, transform 0.15s ease;
+}
+
+.basket-toggle span {
+  font-weight: 700;
+  margin-left: 4px;
+  transition: font-size 0.2s ease;
+}
+
+/* --- Responsive gemeinsame Skalierung --- */
+@media (max-width: 430px) {
+  .basket-toggle { font-size: 14px; }
+  .basket-toggle span { font-size: 14px; }
+}
+
+@media (max-width: 390px) {
+  .basket-toggle { font-size: 13px; }
+  .basket-toggle span { font-size: 13px; }
+}
+
+@media (max-width: 350px) {
+  .basket-toggle { font-size: 12.5px; }
+  .basket-toggle span { font-size: 12.5px; }
+}
+
+@media (max-width: 320px) {
+  .basket-toggle { font-size: 12px; }
+  .basket-toggle span { font-size: 12px; }
+}

@@ -128,21 +128,34 @@ function renderBasket() {
 }
 
 function updateTotals() {
+  const { subtotal, delivery, total } = calculateTotals();
+  updateDesktopTotals(subtotal, delivery, total);
+  updateMobileTotals(subtotal, delivery, total);
+}
 
-const subtotal = Array.from(basket.values()).reduce(
+function calculateTotals() {
+  const subtotal = Array.from(basket.values()).reduce(
     (sum, item) => sum + item.price * item.qty,
     0
-);
-const delivery = RESTAURANT.deliveryFee || 3.5;
-const total = subtotal + delivery;
+  );
+  const delivery = RESTAURANT.deliveryFee || 3.5;
+  const total = subtotal + delivery;
+  return { subtotal, delivery, total };
+}
 
-document.getElementById("subTotal").textContent = price(subtotal);
-document.getElementById("delivery").textContent = price(delivery);
-document.getElementById("grandTotal").textContent = price(total);
+function updateDesktopTotals(subtotal, delivery, total) {
+  const subTotalEl = document.getElementById("subTotal");
+  const deliveryEl = document.getElementById("delivery");
+  const grandTotalEl = document.getElementById("grandTotal");
+  const miniTotalEl = document.getElementById("miniTotal");
 
-const miniTotal = document.getElementById("miniTotal");
-  if (miniTotal) miniTotal.textContent = price(total);
+  if (subTotalEl) subTotalEl.textContent = price(subtotal);
+  if (deliveryEl) deliveryEl.textContent = price(delivery);
+  if (grandTotalEl) grandTotalEl.textContent = price(total);
+  if (miniTotalEl) miniTotalEl.textContent = price(total);
+}
 
+function updateMobileTotals(subtotal, delivery, total) {
   const subTotalM = document.getElementById("subTotalM");
   const deliveryM = document.getElementById("deliveryM");
   const grandTotalM = document.getElementById("grandTotalM");
@@ -178,7 +191,6 @@ function closeDialog() {
     .getElementById("basketToggle")
     .setAttribute("aria-expanded", "false");
 }
-
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.getElementById("navMenu");
 
